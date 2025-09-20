@@ -16,7 +16,7 @@ const payoutRoutes = require('./routes/payoutRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 
 // Import middleware
-const errorHandler = require('./middleware/errorHandler');
+// const errorHandler = require('./middleware/errorHandler');
 
 // Import seeder
 const seedQuestions = require('./seeders/seedQuestions');
@@ -97,9 +97,9 @@ app.post('/api/admin/cleanup-transactions/:type', async (req, res) => {
 });
 
 // Error handling middleware
-app.use(errorHandler);
+// app.use(errorHandler);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
