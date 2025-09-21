@@ -27,15 +27,15 @@ const { scheduleCleanupJobs, runCleanupNow, cleanupTransactionsByType } = requir
 const app = express();
 
 // Middleware
-app.use(express.json());  
+app.use(express.json());   
 
 // CORS configuration
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'https://pulse-survey-theta.vercel.app/',
+  origin: process.env.CLIENT_URL || 'https://pulse-survey-theta.vercel.app',
   credentials: true
-}));
+})); 
 
-// Session configuration (90 days)
+// Session configuration (90 days) 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'your-secret-key-change-in-production',
   resave: false,
