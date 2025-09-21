@@ -7,30 +7,37 @@ const answerController = {
   submitAnswer: async (req, res) => {
     try {
       const { questionId, choice } = req.body;
-      const userEmail = req.session.userEmail;
-     
-      // Find user
-      const user = await User.findOne({ email: userEmail });
+      
+      // Get user from middleware (req.user is set by requireAuth middleware)
+      const user = req.user;
+      
       if (!user) {
-        return res.status(404).json({ error: 'User not found' });
+        return res.status(401).json({ error: 'User not found in session' });
       }
 
-      // Check if user already answered this question
-    //   const existingAnswer = await Answer.findOne({ 
-    //     userId: user.id, 
-    //     questionId 
-    //   });
+      console.log('Submitting answer for user:', user.email); // Debug log
 
-    //   if (existingAnswer) {
-    //     return res.status(400).json({ error: 'Question already answered' });
-    //   }
+      // Validate input
+      if (!questionId || !choice) {
+        return res.status(400).json({ error: 'Question ID and choice are required' });
+      }
 
-      // Save answer
-      const answer = new Answer({
-        userId: user.id,
-        questionId,
-        choice
-      });
+      // Check if user already answered this question (uncomment if needed)
+      // const existingAnswer = await Answer.findOne({ 
+      //   userId: user._id, 
+      //   questionId 
+      // });
+
+      // if (existingAnswer) {
+      //   return res.status(400).json({ error: 'Question already answered' });
+      // }
+
+      // Save answer (uncomment when ready)
+      // const answer = new Answer({
+      //   userId: user._id,
+      //   questionId,
+      //   choice
+      // });
       // await answer.save();
 
       // Add reward transaction
@@ -43,13 +50,17 @@ const answerController = {
         created_at: Date.now()
       };
 
+      user.transactions = user.transactions || [];
       user.transactions.push(transaction);
-      user.balance += rewardAmount;
+      user.balance = (user.balance || 0) + rewardAmount;
       await user.save();
 
+      console.log('Answer submitted successfully for user:', user.email); // Debug log
+
       res.json({
+        success: true,
         message: 'Answer submitted and reward credited',
-        reward: rewardAmount,
+        coinsEarned: rewardAmount,
         newBalance: user.balance,
         transaction
       });

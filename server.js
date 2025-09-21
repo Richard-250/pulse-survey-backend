@@ -32,7 +32,9 @@ app.use(express.json());
 // CORS configuration
 app.use(cors({
   origin: process.env.CLIENT_URL || 'https://pulse-survey-theta.vercel.app',
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 })); 
 
 // Session configuration (90 days) 
@@ -46,6 +48,7 @@ app.use(session({
   cookie: {
     secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
+    sameSite: process.env.NODE_ENV === 'environment' ? 'none' : 'lax',
     maxAge: 90 * 24 * 60 * 60 * 1000 // 90 days
   }
 }));
