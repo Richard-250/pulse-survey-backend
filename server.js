@@ -45,12 +45,13 @@ app.use(session({
   store: MongoStore.create({
     mongoUrl: process.env.MONGODB_URI || 'mongodb://localhost:27017/survey-app'
   }),
-  cookie: {
-    secure: process.env.NODE_ENV === 'production',
-    httpOnly: true,
-    sameSite: process.env.NODE_ENV === 'development' ? 'none' : 'lax',
-    maxAge: 90 * 24 * 60 * 60 * 1000 // 90 days
-  }
+cookie: {
+  secure: true,
+  httpOnly: true,
+  sameSite: "none",   // allow cross-site
+  maxAge: 90 * 24 * 60 * 60 * 1000
+}
+
 }));
 
 // Routes
