@@ -34,7 +34,8 @@ app.use(cors({
   origin: process.env.CLIENT_URL || 'https://pulse-survey-theta.vercel.app',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['set-cookie']   // 🔴 add this
 })); 
 
 // Session configuration (90 days) 
