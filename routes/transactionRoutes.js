@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const transactionController = require('../controllers/transactionController');
-const { requireAuth } = require('./middleware/auth');
+const { requireAuth } = require('../middleware/auth');
 const { validateAnswer, validatePayout, validatePagination } = require('./middleware/validation');
 
 // POST /api/answers/submit - Submit answer and get reward

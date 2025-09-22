@@ -13,9 +13,6 @@ const answerRoutes = require('./routes/answers');
 const payoutRoutes = require('./routes/payoutRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 
-// Import middleware
-// const errorHandler = require('./middleware/errorHandler');
-
 // Import seeder
 const seedQuestions = require('./seeders/seedQuestions');
 
@@ -81,8 +78,6 @@ app.post('/api/admin/cleanup-transactions/:type', async (req, res) => {
   }
 });
 
-// Error handling middleware
-// app.use(errorHandler);
 
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, async () => {
@@ -95,7 +90,7 @@ app.listen(PORT, async () => {
   // Schedule cleanup jobs
   scheduleCleanupJobs();
   
-  // Optional: Run initial cleanup on server start
+  // Optional: Run initial cleanup on server start 
   // await runCleanupNow();
 });
 
