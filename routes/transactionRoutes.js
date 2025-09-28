@@ -17,4 +17,6 @@ router.post('/payout/request', requireAuth, validatePayout, transactionControlle
 // GET /api/transactions/my - Get user's transaction history
 router.get('/transactions/my', requireAuth, validatePagination, transactionController.getTransactionHistory);
 
+
+
 module.exports = router;

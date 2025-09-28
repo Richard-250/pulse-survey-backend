@@ -12,13 +12,14 @@ const questionRoutes = require('./routes/questions');
 const answerRoutes = require('./routes/answers');
 const payoutRoutes = require('./routes/payoutRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 // Import seeder
 const seedQuestions = require('./seeders/seedQuestions');
 
 // Import cleanup jobs
 const { scheduleCleanupJobs, runCleanupNow, cleanupTransactionsByType } = require('./jobs/transactionCleanup');
-
+ 
 const app = express();
 
 // Middleware
@@ -30,14 +31,15 @@ app.use(cors({
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
-}));
-
+})); 
+  
 // Routes
-app.use('/api/auth', authRoutes);
+app.use('/api/auth', authRoutes); 
 app.use('/api/questions', questionRoutes);
 app.use('/api/answers', answerRoutes);
 app.use('/api/payout', payoutRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api', contactRoutes);
 
 // Health check route
 app.get('/', (req, res) => {
@@ -79,7 +81,7 @@ app.post('/api/admin/cleanup-transactions/:type', async (req, res) => {
 });
 
 
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);

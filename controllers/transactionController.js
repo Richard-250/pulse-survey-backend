@@ -64,7 +64,7 @@ const submitAnswer = async (req, res) => {
       amount_coins: rewardAmount,
       status: 'completed',
       created_at: Date.now()
-    };
+    }; 
 
     user.transactions.push(transaction);
     user.balance += rewardAmount;

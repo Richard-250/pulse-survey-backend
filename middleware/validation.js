@@ -12,7 +12,7 @@ const handleValidationErrors = (req, res, next) => {
   }
   next();
 };
-
+ 
 // Validation rules
 const validateRegister = [
   body('email')
